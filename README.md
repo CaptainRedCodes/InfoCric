@@ -47,9 +47,9 @@ The Cricket Stats Dashboard is a web application built using Django that allows 
    ```
 
 4. **Create a configuration file**:
-   Create a file named `config.py` in the project root directory and add your API keys:
+   Create a file named `configure.py` in the project stats directory and add your API keys:
    ```python
-   # config.py
+   # configure.py
    API_KEY = "your_api_key_here"
    API_HOST = "your_api_host_here"
    ```
@@ -74,7 +74,7 @@ Get your API KEY from
 ```
 https://rapidapi.com/cricketapilive/api/cricbuzz-cricket/playground/apiendpoint_cf992c8a-4262-4682-a0bd-7fa16b609e5f
 ```
-Create a file named `config.py` in the project root directory and add your API keys:
+Create a file named `configure.py` in the project stats directory and add your API keys:
    ```python
    # config.py
    API_KEY = "your_api_key_here"
