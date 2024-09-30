@@ -1,5 +1,5 @@
 
-# Cricket Stats Dashboard
+# InfoCric-A Cricket Information Dashboard
 
 ## Overview
 
