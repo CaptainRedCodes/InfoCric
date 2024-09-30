@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoCric - Search Cricketer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-primary-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12 fade-in">
+            <h1 class="text-4xl font-bold text-primary-800 mb-2">
+                Info Cric
+            </h1>
+            <p class="text-xl text-primary-600">Discover the Stars of Cricket</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl mb-8 fade-in">
+            <div class="p-8">
+                <h2 class="text-2xl font-semibold text-primary-700 mb-6">Search for a Cricketer</h2>
+                <form method="POST" class="space-y-4">
+                    {% csrf_token %}
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <input
+                            type="text"
+                            name="cricketer_name"
+                            placeholder="Enter cricketer name"
+                            autocomplete="off"
+                            class="flex-grow px-4 py-3 border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300"
+                            required
+                        >
+                        <button
+                            type="submit"
+                            class="w-full sm:w-auto px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300 flex items-center justify-center"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% if stats and player_details %}
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl fade-in">
+            <div class="p-8">
+                <h2 class="text-2xl font-semibold text-primary-700 mb-6">Cricketer Information</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
+                    <div class="lg:col-span-1">
+                        <img
+                            src="https://i.cricketcb.com/stats/img/faceImages/{{ stats.faceImageId }}.jpg"
+                            alt="{{ stats.name }}"
+                            class="w-full rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
+                        >
+                        <h3 class="text-2xl font-bold text-primary-800 mt-4 mb-2">{{ stats.name }}</h3>
+                        <div class="flex space-x-4 mb-6">
+                            <button onclick="openTab(event, 'info')" class="tab-button bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300">Info</button>
+                            <button onclick="openTab(event, 'career')" class="tab-button bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300">Career</button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div id="info" class="tab-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                                <div>
+                                    <p class="text-sm text-primary-500 font-medium">Batting Style</p>
+                                    <p class="text-lg">{{ player_details.bat|default:"N/A" }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-500 font-medium">Bowling Style</p>
+                                    <p class="text-lg">{{ player_details.bowl|default:"N/A" }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-500 font-medium">Role</p>
+                                    <p class="text-lg">{{ player_details.role|default:"N/A" }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-500 font-medium">Nickname</p>
+                                    <p class="text-lg">{{ player_details.nickName|default:"N/A" }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-500 font-m   edium">Birth Place</p>
+                                    <p class="text-lg">{{ player_details.birthPlace|default:"N/A" }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-500 font-medium">Date of Birth</p>
+                                    <p class="text-lg">{{ player_details.DoB|default:"N/A" }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-500 font-medium">International Team</p>
+                                    <p class="text-lg">{{ player_details.intlTeam|default:"N/A" }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-primary-500 font-medium">Teams</p>
+                                    <p class="text-lg">{{ player_details.teams|default:"N/A" }}</p>
+                                </div>
+                            </div>
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold text-primary-600 mb-4">Batting Stats</h3>
+                                {% if player_stats.batting_stats %}
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full text-left text-sm">
+                                            <thead class="bg-primary-100">
+                                                <tr>
+                                                    <th class="px-6 py-3">Stat</th>
+                                                    <th class="px-6 py-3">Test</th>
+                                                    <th class="px-6 py-3">ODI</th>
+                                                    <th class="px-6 py-3">T20</th>
+                                                    <th class="px-6 py-3">IPL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                                {% for stats in player_stats.batting_stats %}
+                                                <tr>
+                                                    <td class="px-6 py-4">{{ stats.name }}</td>
+                                                    <td class="px-6 py-4">{{ stats.Test }}</td>
+                                                    <td class="px-6 py-4">{{ stats.ODI }}</td>
+                                                    <td class="px-6 py-4">{{ stats.T20 }}</td>
+                                                    <td class="px-6 py-4">{{ stats.IPL }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% else %}
+                                    <p>No batting stats available.</p>
+                                {% endif %}
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-semibold text-primary-600 mb-4">Bowling Stats</h3>
+                                {% if player_stats.bowling_stats %}
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full text-left text-sm">
+                                            <thead class="bg-primary-100">
+                                                <tr>
+                                                    <th class="px-6 py-3">Stat</th>
+                                                    <th class="px-6 py-3">Test</th>
+                                                    <th class="px-6 py-3">ODI</th>
+                                                    <th class="px-6 py-3">T20</th>
+                                                    <th class="px-6 py-3">IPL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                                {% for stats in player_stats.bowling_stats %}
+                                                <tr>
+                                                    <td class="px-6 py-4">{{ stats.name }}</td>
+                                                    <td class="px-6 py-4">{{ stats.Test }}</td>
+                                                    <td class="px-6 py-4">{{ stats.ODI }}</td>
+                                                    <td class="px-6 py-4">{{ stats.T20 }}</td>
+                                                    <td class="px-6 py-4">{{ stats.IPL }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% else %}
+                                    <p>No bowling stats available.</p>
+                                {% endif %}
+                            </div>
+                            
+                            
+                            {% if messages %}
+                            <div class="mt-4">
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li class="{% if message.tags %}{{ message.tags }}{% endif %} p-2 mb-2 rounded">{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div id="career" class="tab-content hidden">
+                            {% if player_career %}
+                                <div class="space-y-4">
+                                    <h3 class="text-xl font-bold text-primary-800">Formats</h3>
+                                    {% for format in player_career.formats %}
+                                        <div class="border-b border-primary-200 py-4">
+                                            <h4 class="text-lg font-semibold text-primary-700">{{ format.name|upper }}</h4>
+                                            <p><strong>Debut:</strong> {{ format.debut|default:"N/A" }}</p>
+                                            <p><strong>Last Played:</strong> {{ format.lastPlayed|default:"N/A" }}</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="mt-6">
+                                    <a href="{{ player_career.webURL }}" target="_blank" class="text-primary-600 underline">View full profile on Cricbuzz</a>
+                                </div>
+                            {% else %}
+                                <p>No career information available.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <script>
+
+        function openTab(evt, tabName) {
+            var i, tabContent, tabButtons;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabButtons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].className = tabButtons[i].className.replace(" bg-primary-600", " bg-primary-500");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className = evt.currentTarget.className.replace(" bg-primary-500", " bg-primary-600");
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelector('.tab-button').click();
+        });
+
+    </script>
+</body>
+</html>
