@@ -99,13 +99,6 @@ def career_of_player(player_id):
 
     return None
 
-def stats_of_player(player_id):
-    batting_url = f"https://cricbuzz-cricket.p.rapidapi.com/stats/v1/player/{player_id}/batting"
-    bowling_url = f"https://cricbuzz-cricket.p.rapidapi.com/stats/v1/player/{player_id}/bowling"
-    headers = {
-        "x-rapidapi-key": API_KEY,
-        "x-rapidapi-host": API_HOST
-    }
 def process_stats(data):
     # Extract headers (formats like Test, ODI, T20, IPL)
     headers = data.get('headers', [])
