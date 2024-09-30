@@ -1,4 +1,4 @@
-```markdown
+
 # Cricket Stats Dashboard
 
 ## Overview
