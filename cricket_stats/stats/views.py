@@ -142,7 +142,7 @@ def stats_of_player(player_id):
     try:
         batting_response = requests.get(batting_url, headers=headers)
         batting_response.raise_for_status()
-        batting_data = batting_response.json()  # Debug print
+        batting_data = batting_response.json()  
         batting_stats = process_stats(batting_data)
     except requests.RequestException as e:
         print(f"Error fetching batting stats: {str(e)}")
@@ -156,6 +156,6 @@ def stats_of_player(player_id):
         print(f"Error fetching bowling stats: {str(e)}")
 
     return {
-        'batting_stats': batting_stats,  # Changed to match your template
-        'bowling_stats': bowling_stats     # Changed to match your template
+        'batting_stats': batting_stats,  
+        'bowling_stats': bowling_stats    
     }
