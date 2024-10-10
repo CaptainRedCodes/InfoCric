@@ -7,7 +7,6 @@ API_KEY = API_KEY
 API_HOST = API_HOST
 
 def search_cricketer(request):
-    print("search_cricketer view called")  # Debugging line
     stats = None
     player_details = None
     player_career = None
@@ -29,6 +28,8 @@ def search_cricketer(request):
                 'player_career': player_career,
                 "player_stats":player_stats
             })
+    
+    return render(request,'stats/search.html')
 
 def get_cricketer_id(cricketer_name):
     url = API_URL
@@ -99,13 +100,6 @@ def career_of_player(player_id):
 
     return None
 
-def stats_of_player(player_id):
-    batting_url = f"https://cricbuzz-cricket.p.rapidapi.com/stats/v1/player/{player_id}/batting"
-    bowling_url = f"https://cricbuzz-cricket.p.rapidapi.com/stats/v1/player/{player_id}/bowling"
-    headers = {
-        "x-rapidapi-key": API_KEY,
-        "x-rapidapi-host": API_HOST
-    }
 def process_stats(data):
     # Extract headers (formats like Test, ODI, T20, IPL)
     headers = data.get('headers', [])
@@ -142,7 +136,7 @@ def stats_of_player(player_id):
     try:
         batting_response = requests.get(batting_url, headers=headers)
         batting_response.raise_for_status()
-        batting_data = batting_response.json()  # Debug print
+        batting_data = batting_response.json()  
         batting_stats = process_stats(batting_data)
     except requests.RequestException as e:
         print(f"Error fetching batting stats: {str(e)}")
@@ -156,6 +150,6 @@ def stats_of_player(player_id):
         print(f"Error fetching bowling stats: {str(e)}")
 
     return {
-        'batting_stats': batting_stats,  # Changed to match your template
-        'bowling_stats': bowling_stats     # Changed to match your template
+        'batting_stats': batting_stats,  
+        'bowling_stats': bowling_stats    
     }
