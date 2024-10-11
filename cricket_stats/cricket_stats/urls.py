@@ -22,4 +22,5 @@ urlpatterns = [
     path('stats/',include('stats.urls')),
     path('matches/',include('matchlist.urls')),
     path('serieslist/',include('serieslist.urls')),
+    path('',include('home.urls')),
 ]

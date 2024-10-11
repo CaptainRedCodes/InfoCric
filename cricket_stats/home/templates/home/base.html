@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}InfoCric - Your Cricket Hub{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .stagger-delay-1 { animation-delay: 0.1s; }
+        .stagger-delay-2 { animation-delay: 0.2s; }
+        .stagger-delay-3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-primary-100 min-h-screen font-sans">
+    <nav class="bg-primary-700 p-4 shadow-md sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'home:home' %}" class="text-white text-2xl font-bold flex items-center">InfoCric</a>
+            <div class="space-x-6 hidden md:block">
+                <a href="{% url 'home:home' %}" class="text-white hover:text-primary-200 transition duration-300">Home</a>
+                <a href="{% url 'stats:search_cricketer' %}" class="text-white hover:text-primary-200 transition duration-300">Cricketer Info</a>
+                <a href="{% url 'matchlist:matchlist' %}" class="text-white hover:text-primary-200 transition duration-300">Recent Matches</a>
+                <a href="{% url 'serieslist:serieslist' %}" class="text-white hover:text-primary-200 transition duration-300">Upcoming Series</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none" id="mobileMenuBtn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="md:hidden bg-primary-600 p-4 hidden" id="mobileMenu">
+        <a href="{% url 'home:home' %}" class="block text-white py-2">Home</a>
+        <a href="{% url 'stats:search_cricketer' %}" class="block text-white py-2">Cricketer Info</a>
+        <a href="{% url 'matchlist:matchlist' %}" class="block text-white py-2">Recent Matches</a>
+        <a href="{% url 'serieslist:serieslist' %}" class="block text-white py-2">Upcoming Series</a>
+    </div>
+
+    <main class="container mx-auto mt-8 px-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-primary-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">About InfoCric</h3>
+                    <p class="text-sm">Your ultimate source for cricket information, live scores, and in-depth analysis.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{% url 'home:home' %}" class="hover:text-primary-300 transition duration-300">Home</a></li>
+                        <li><a href="#" class="hover:text-primary-300 transition duration-300">Live Scores[COMING SOON]</a></li>
+                        <li><a href="#" class="hover:text-primary-300 transition duration-300">News[COMING SOON]</a></li>
+                        <li><a href="#" class="hover:text-primary-300 transition duration-300">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-primary-300 transition duration-300">
+                            <!-- Facebook SVG -->
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-primary-300 transition duration-300">
+                            <!-- Instagram SVG -->
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 017.168 2.525C6.532 2.278 5.805 2.009 4.741 1.96 3.674 1.911 3.33 1.898 0 1.898c2.43 0 2.784-.013 3.808-.06 1.064-.049 1.791-.218 2.427-.465a4.902 4.902 0 011.772-1.153A4.902 4.902 0 018.854 1.625C8.895 1.56 9.44 1.546 12.315 1.546zm-2.805 3.045a6.85 6.85 0 00-2.135.586 6.923 6.923 0 00-2.35 2.32 6.89 6.89 0 00-.926 2.64 6.835 6.835 0 00-.07 2.615c.08 1.48.72 2.668 1.923 4.244 1.277 1.552 2.39 2.052 3.515 2.052 1.143 0 2.305-.55 3.303-1.446 1.185-1.184 1.905-2.479 2.67-3.747.227-.427.459-.851.715-1.275.016-.028.032-.056.05-.083.025-.038.058-.086.093-.141.007-.013.013-.027.021-.041.002-.005.005-.009.007-.013a6.861 6.861 0 00.029-.037c1.039-1.348 1.893-3.024 1.893-4.879 0-1.25-.29-2.469-.862-3.541a6.89 6.89 0 00-2.638-2.35 6.835 6.835 0 00-2.615-.07 6.894 6.894 0 00-2.64.926 6.923 6.923 0 00-2.32 2.35 6.85 6.85 0 00-.586 2.135 6.883 6.883 0 00.07 2.63c.08 1.48.72 2.668 1.923 4.244 1.277 1.552 2.39 2.052 3.515 2.052 1.143 0 2.305-.55 3.303-1.446 1.185-1.184 1.905-2.479 2.67-3.747.227-.427.459-.851.715-1.275.016-.028.032-.056.05-.083.025-.038.058-.086.093-.141.007-.013.013-.027.021-.041.002-.005.005-.009.007-.013A6.861 6.861 0 0020.375 12c.03-1.183-.057-2.363-.268-3.552-1.054.101-1.996.739-2.738 1.458-.71.693-1.416 1.45-2.15 2.151-1.265 1.265-3.077 2.013-4.668 2.013s-3.487-.748-4.668-2.013c-1.265-1.265-1.458-2.025-2.151-2.738-1.122-1.5-1.73-2.598-1.73-4.75 0-1.678.496-3.039 1.389-4.153.985-1.106 2.51-1.843 4.136-1.843 1.247 0 2.586.432 3.909 1.108a6.85 6.85 0 012.135-.586 6.923 6.923 0 012.35 2.32 6.89 6.89 0 012.638 2.35 6.835 6.835 0 01.07 2.615c-.08 1.48-.72 2.668-1.923 4.244-1.277 1.552-2.39 2.052-3.515 2.052-1.143 0-2.305-.55-3.303-1.446-1.185-1.184-1.905-2.479-2.67-3.747-.227-.427-.459-.851-.715-1.275-.016-.028-.032-.056-.05-.083-.025-.038-.058-.086-.093-.141-.007-.013-.013-.027-.021-.041-.002-.005-.005-.009-.007-.013a6.861 6.861 0 00-.029-.037C8.046 10.387 7.17 8.367 7.17 6.59c0-1.25.29-2.469.862-3.541a6.89 6.89 0 012.638-2.35 6.835 6.835 0 012.615-.07c1.48.08 2.668.72 4.244 1.923 1.552 1.277 2.052 2.39 2.052 3.515 0 1.143-.55 2.305-1.446 3.303-1.184 1.185-2.479 1.905-3.747 2.67-.427.227-.851.459-1.275.715-.028.016-.056.032-.083.05-.038.025-.086.058-.141.093-.013.007-.027.013-.041.021-.005.002-.009.005-.013.007A6.861 6.861 0 0010.315 8c-.03 1.183.057 2.363.268 3.552z" clip-rule="evenodd" /></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                    <p class="text-sm">info@infocric.com</p>
+                    <p class="text-sm">+1 (123) 456-7890</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

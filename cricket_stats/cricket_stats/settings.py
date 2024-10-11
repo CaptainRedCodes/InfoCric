@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'stats',
     'matchlist',
     'serieslist',
+    'home',
 ]
 
 MIDDLEWARE = [

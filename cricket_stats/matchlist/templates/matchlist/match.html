@@ -1,69 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Match List</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    },
-                    colors: {
-                        'cricket-green': '#0a5f38',
-                        'cricket-blue': '#1e3a8a',
-                    }
+{% extends 'home/base.html' %}
+{% block title %}Cricket Match List {% endblock %}
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Poppins', 'sans-serif'],
+                },
+                colors: {
+                    'cricket-green': '#0a5f38',
+                    'cricket-blue': '#1e3a8a',
+                    'cricket-white': '#ffffff',  // You can define white if needed
                 }
             }
         }
-    </script>
+    }
+</script>
 </head>
+{% block content %}
 <body class="bg-gray-100 font-sans">
-    <header class="bg-cricket-green text-white py-6 shadow-md">
+    <header class="bg-cricket-green text-cricket-green py-6 shadow-md">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl font-bold text-center">Cricket Match List</h1>
+            <h1 class="text-4xl font-bold text-center text-cricket-green">Cricket Match List</h1> <!-- Change to cricket-green -->
         </div>
     </header>
     <main class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for match in matches %}
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
-                    <div class="bg-gradient-to-r from-cricket-green to-cricket-blue text-white p-6">
-                        <h2 class="text-xl font-semibold">{{match.name}}</h2>
-                        <p class="text-sm mt-2 opacity-80">{{match.formatted_date}}</p>
+                    <div class="bg-gradient-to-r from-cricket-green to-cricket-blue p-6">
+                        <h2 class="text-xl font-semibold text-cricket-white">{{ match.name }}</h2> <!-- Change to cricket-white -->
+                        <p class="text-sm mt-2 opacity-80 text-cricket-white">{{ match.formatted_date }}</p> <!-- Change to cricket-white -->
                     </div>
                     <div class="p-6">
-                        <p class="text-gray-700 mb-2"><span class="font-semibold">Type:</span> {{match.matchType | upper}}</p>
-                        <p class="text-gray-700 mb-2"><span class="font-semibold">Venue:</span> {{match.venue}}</p>
-                        <p class="text-gray-700 mb-4"><span class="font-semibold">Status:</span> <span class="font-bold text-cricket-green">{{match.status}}</span></p>
+                        <p class="text-gray-700 mb-2"><span class="font-semibold">Type:</span> {{ match.matchType | upper }}</p>
+                        <p class="text-gray-700 mb-2"><span class="font-semibold">Venue:</span> {{ match.venue }}</p>
+                        <p class="text-gray-700 mb-4"><span class="font-semibold">Status:</span> <span class="font-bold text-cricket-green">{{ match.status }}</span></p>
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <h3 class="font-semibold mb-3 text-gray-800">Scoreboard</h3>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-800">{{match.teams.0}}</p>
+                                    <p class="text-sm font-medium text-gray-800">{{ match.teams.0 }}</p>
                                     <p class="text-sm text-gray-600">
                                         {% if match.score.0.r and match.score.0.w and match.score.0.o %}
-                                            {{match.score.0.r}}/{{match.score.0.w}} ({{match.score.0.o}})
+                                            {{ match.score.0.r }}/{{ match.score.0.w }} ({{ match.score.0.o }})
                                         {% else %}
                                             -
                                         {% endif %}
                                     </p>
-                                    <p class="text-xs text-gray-500 mt-1">{{match.score.0.inning}}</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ match.score.0.inning }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-800">{{match.teams.1}}</p>
+                                    <p class="text-sm font-medium text-gray-800">{{ match.teams.1 }}</p>
                                     <p class="text-sm text-gray-600">
                                         {% if match.score.1.r and match.score.1.w and match.score.1.o %}
-                                            {{match.score.1.r}}/{{match.score.1.w}} ({{match.score.1.o}})
+                                            {{ match.score.1.r }}/{{ match.score.1.w }} ({{ match.score.1.o }})
                                         {% else %}
                                             -
                                         {% endif %}
                                     </p>
-                                    <p class="text-xs text-gray-500 mt-1">{{match.score.1.inning}}</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ match.score.1.inning }}</p>
                                 </div>
                             </div>
                         </div>
@@ -73,4 +71,5 @@
         </div>
     </main>
 </body>
+{% endblock %}
 </html>

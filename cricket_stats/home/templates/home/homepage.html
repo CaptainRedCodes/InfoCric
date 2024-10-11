@@ -1,0 +1,112 @@
+{% extends 'home/base.html' %}
+    <title>InfoCric - Your Cricket Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .stagger-delay-1 { animation-delay: 0.1s; }
+        .stagger-delay-2 { animation-delay: 0.2s; }
+        .stagger-delay-3 { animation-delay: 0.3s; }
+    </style>
+</head>
+{% block content %}
+    <main class="container mx-auto mt-8 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="fade-in stagger-delay-1">
+                <h1 class="text-4xl md:text-5xl font-bold text-primary-800 mb-4">Welcome to InfoCric</h1>
+                <p class="text-lg text-primary-700 mb-6">Your one-stop destination for all things cricket!</p>
+                <img src="https://images.icc-cricket.com/image/upload/t_ratio21_9-size60/v1719742258/prd/tpglffhkwkhjxzqgps4r" alt="Cricket stadium" class="rounded-lg shadow-md w-full object-cover h-64 md:h-auto"/>
+            </div>
+            <div class="fade-in stagger-delay-2">
+                <h2 class="text-2xl font-semibold text-primary-700 mb-4">Latest Cricket News</h2>
+                <ul class="space-y-4">
+                    <li class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                        <h3 class="font-bold text-xl mb-2">Spotlight on India's vice-captain with Rohit in doubt for Perth Test</h3>
+                        <p class="text-gray-600">The selectors are keen on appointing a deputy, not as temporary choice but as a long-term decision..</p>
+                        <a href="https://www.espncricinfo.com/story/ind-vs-aus-rohit-sharma-could-miss-perth-test-in-australia-spotlight-on-india-vice-captaincy-1454853" class="text-primary-600 hover:text-primary-700 font-semibold mt-2 inline-block">Read more</a>
+                    </li>
+                    <li class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                        <h3 class="font-bold text-xl mb-2">Nitish Kumar Reddy makes an all-round splash as India seal the series</h3>
+                        <p class="text-gray-600">India's spinners finish the job, with miserly and incisive spells</p>
+                        <a href="https://www.espncricinfo.com/series/bangladesh-in-india-2024-25-1439844/india-vs-bangladesh-2nd-t20i-1439894/match-report" class="text-primary-600 hover:text-primary-700 font-semibold mt-2 inline-block">Read more</a>
+                    </li>
+                    <li class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                        <h3 class="font-bold text-xl mb-2">Root overtakes Cook as England's leading scorer in Tests</h3>
+                        <p class="text-gray-600">Cook believes that Root can go on to surpass Sachin Tendulkar's all-time tally</p>
+                        <a href="https://www.espncricinfo.com/story/pak-vs-eng-joe-root-overtakes-alastair-cook-as-england-s-leading-scorer-in-tests-1454443" class="text-primary-600 hover:text-primary-700 font-semibold mt-2 inline-block">Read more</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mb-12 fade-in stagger-delay-3">
+            <h2 class="text-2xl font-semibold text-primary-700 mb-4">Featured Video</h2>
+            <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/nCTUP7-tLrU?si=YM3qQrYjylnigG7a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition duration-300 fade-in stagger-delay-1">
+                <img src="/api/placeholder/64/64" alt="Live Scores Icon" class="w-16 h-16 mb-4 mx-auto">
+                <h2 class="text-2xl font-semibold mb-2 text-center">Live Scores</h2>
+                <p class="text-gray-600 text-center">Stay updated with real-time scores from matches around the world.</p>
+                <p class="text-red-800 text-center">COMING SOON!</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition duration-300 fade-in stagger-delay-2">
+                <img src="/api/placeholder/64/64" alt="Player Stats Icon" class="w-16 h-16 mb-4 mx-auto">
+                <h2 class="text-2xl font-semibold mb-2 text-center">Player Statistics</h2>
+                <p class="text-gray-600 text-center">Dive deep into comprehensive stats of your favorite cricketers.</p>
+                <p class="text-red-800 text-center">COMING SOON!</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition duration-300 fade-in stagger-delay-3">
+                <img src="" alt="Match Analysis Icon" class="w-16 h-16 mb-4 mx-auto">
+                <h2 class="text-2xl font-semibold mb-2 text-center">Match Analysis</h2>
+                <p class="text-gray-600 text-center">Expert insights and in-depth analysis of cricket matches.</p>
+                <p class="text-red-800 text-center">COMING SOON!</p>
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+
+   
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
