@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>Get ready with the madness on the table</p>
+        <div class="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">∞</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">∞</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">∞</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">∞</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.countdown-item {
+    margin: 0 10px;
+}
+
+.countdown-number {
+    font-size: 3rem;
+    color: greenyellow;
+    display: block;
+}
+
+.countdown-label {
+    font-size: 1rem;
+    color: #999;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .countdown-number {
+        font-size: 2.5rem;
+    }
+
+    .email-input {
+        width: 90%;
+    }
+
+    .subscribe-btn {
+        width: 100%;
+    }
+}
+</style>
+</html>

@@ -23,4 +23,9 @@ urlpatterns = [
     path('matches/',include('matchlist.urls')),
     path('serieslist/',include('serieslist.urls')),
     path('',include('home.urls')),
+    path('accounts/',include('userlogin.urls')),
+    path('auction/',include('auction.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
+
+    #path('auction/',include('auction.urls')),
 ]

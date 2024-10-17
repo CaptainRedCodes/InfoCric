@@ -1,9 +1,10 @@
 from django.shortcuts import render
 import requests
+from .configure import API_KEY
 
 # Create your views here.
 def serieslist(request):
-    apikey = "84a8ce67-a812-4ac9-bf9a-66ab06c97709"
+    apikey = API_KEY
     response=requests.get(f"https://api.cricapi.com/v1/series?apikey={apikey}&offset=0")
 
     if response.status_code == 200:

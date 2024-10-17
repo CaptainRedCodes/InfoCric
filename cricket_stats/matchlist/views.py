@@ -1,9 +1,9 @@
 import requests
 from django.shortcuts import render
 from datetime import datetime
-
+from .configure import API_KEY
 def matchlist(request):
-    apikey="84a8ce67-a812-4ac9-bf9a-66ab06c97709"
+    apikey=API_KEY
     response = requests.get(f"https://api.cricapi.com/v1/currentMatches?apikey={apikey}&offset=0")
 
     if response.status_code == 200:

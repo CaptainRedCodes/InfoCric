@@ -54,7 +54,19 @@
                 <a href="{% url 'stats:search_cricketer' %}" class="text-white hover:text-primary-200 transition duration-300">Cricketer Info</a>
                 <a href="{% url 'matchlist:matchlist' %}" class="text-white hover:text-primary-200 transition duration-300">Recent Matches</a>
                 <a href="{% url 'serieslist:serieslist' %}" class="text-white hover:text-primary-200 transition duration-300">Upcoming Series</a>
+                <a href="{% url 'auction:coming_soon' %}" class="text-white hover:text-primary-200 transition duration-300">AUCTION!</a>
+                
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'userlogin:logout' %}" style="display:inline;">  <!-- Inline form -->
+                        {% csrf_token %}
+                        <button class="text-white hover:text-primary-200 bg-red-600 hover:bg-red-700 transition duration-300">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'userlogin:login' %}" class="text-white hover:text-primary-200 transition duration-300">Login</a>
+                    <a href="{% url 'userlogin:signup' %}" class="text-white hover:text-primary-200 transition duration-300">Sign Up</a>
+                {% endif %}
             </div>
+            
             <button class="md:hidden text-white focus:outline-none" id="mobileMenuBtn">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>

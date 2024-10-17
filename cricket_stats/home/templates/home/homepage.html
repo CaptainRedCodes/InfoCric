@@ -82,12 +82,13 @@
                 <p class="text-gray-600 text-center">Stay updated with real-time scores from matches around the world.</p>
                 <p class="text-red-800 text-center">COMING SOON!</p>
             </div>
-            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition duration-300 fade-in stagger-delay-2">
-                <img src="/api/placeholder/64/64" alt="Player Stats Icon" class="w-16 h-16 mb-4 mx-auto">
-                <h2 class="text-2xl font-semibold mb-2 text-center">Player Statistics</h2>
-                <p class="text-gray-600 text-center">Dive deep into comprehensive stats of your favorite cricketers.</p>
-                <p class="text-red-800 text-center">COMING SOON!</p>
+            <div class="bg-white rounded-2xl shadow-xl p-8 transform hover:scale-105 hover:shadow-2xl transition-transform duration-500 ease-in-out fade-in stagger-delay-2">
+                <img src="#" alt="Player Stats Icon" class="w-20 h-20 mb-6 mx-auto rounded-full border-4 border-gray-100 shadow-md">
+                <h2 class="text-3xl font-bold mb-3 text-center text-gray-800">Player Statistics</h2>
+                <p class="text-gray-500 text-center mb-6">Dive deep into comprehensive stats of your favorite cricketers.</p>
+                <a href="{% url 'stats:search_cricketer' %}" class="block w-full text-center py-2 bg-green-500 text-white rounded-lg hover:bg-red-600 transition duration-300 ease-in-out">Cricketer Info</a>
             </div>
+            
             <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition duration-300 fade-in stagger-delay-3">
                 <img src="" alt="Match Analysis Icon" class="w-16 h-16 mb-4 mx-auto">
                 <h2 class="text-2xl font-semibold mb-2 text-center">Match Analysis</h2>
