@@ -48,11 +48,20 @@ The Cricket Stats Dashboard is a web application built using Django that allows 
 
 4. **Create a configuration file**:
    Create a file named `configure.py` in the project stats directory and add your API keys:
+
+   1.*create this in filterstats and stats*
    ```python
    # configure.py
    API_KEY = "your_api_key_here"
    API_HOST = "your_api_host_here"
    ```
+   *get the api key from:*https://rapidapi.com/cricketapilive/api/cricbuzz-cricket
+
+   2.*create this in serieslist and matchlist*
+   ```python
+   API_KEY = "your_api_key"
+   ```
+   *get the api key from:* https://cricketdata.org/
 
 5. **Run the server**:
    ```bash
@@ -68,18 +77,7 @@ The Cricket Stats Dashboard is a web application built using Django that allows 
 2. Click the search button to view the player's statistics.
 3. The statistics will be displayed in a tabular format for both batting and bowling.
 
-## API KEY
 
-Get your API KEY from 
-```
-https://rapidapi.com/cricketapilive/api/cricbuzz-cricket/playground/apiendpoint_cf992c8a-4262-4682-a0bd-7fa16b609e5f
-```
-Create a file named `configure.py` in the project stats directory and add your API keys:
-   ```python
-   # config.py
-   API_KEY = "your_api_key_here"
-   API_HOST = "your_api_host_here"
-```
 
 ## Future Plans
 
@@ -88,6 +86,7 @@ Create a file named `configure.py` in the project stats directory and add your A
 - **Images**: Add player images and stadium pictures for a more visually appealing interface.
 - **Caching**: Implement chaching and storing stats to save API calls.
 - **Statistics Comparison**: Enable users to compare statistics between multiple players.
+- **IPL Auction**: Enable Users to play auction with friends.
 
 ## Contributing
 

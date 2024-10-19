@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 import requests
-from .configure import API_KEY,API_URL,API_HOST
+from .configure import API_KEY,API_HOST
 
 def filter_stats(request):
     stats_type = request.GET.get('statsType', '')
@@ -21,10 +21,10 @@ def filter_stats(request):
     if team:
         querystring['team'] = team
 
-    url = API_URL
+    url = "https://cricbuzz-cricket.p.rapidapi.com/stats/v1/topstats/0"
 
     headers = {
-        "x-rapidapi-key": API_KEY,  # Add your API key here
+        "x-rapidapi-key": API_KEY, 
         "x-rapidapi-host": API_HOST
     }
 
