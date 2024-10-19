@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/',include('userlogin.urls')),
     path('auction/',include('auction.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
+    path('filter/',include('filterstats.urls'))
 
     #path('auction/',include('auction.urls')),
 ]

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'auction',
     'userlogin',
     'social_django',
+    'filterstats',
 ]
 
 MIDDLEWARE = [
