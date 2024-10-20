@@ -101,10 +101,10 @@ def career_of_player(player_id):
     return None
 
 def process_stats(data):
-    # Extract headers (formats like Test, ODI, T20, IPL)
+    
     headers = data.get('headers', [])
     
-    # Extract rows containing stat categories (Matches, Innings, Runs, etc.)
+    
     stats_values = data.get('values', [])
 
     processed_stats = []
