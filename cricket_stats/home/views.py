@@ -50,3 +50,6 @@ def home_view(request):
         'scores': scores,
     }
     return render(request, 'home/homepage.html', context)
+
+def home(request):
+    return render(request,'home/homepage.html')

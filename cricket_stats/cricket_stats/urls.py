@@ -24,9 +24,9 @@ urlpatterns = [
     path('serieslist/',include('serieslist.urls')),
     path('',include('home.urls')),
     path('accounts/',include('userlogin.urls')),
-    path('auction/',include('auction.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('filter/',include('filterstats.urls'))
 
     #path('auction/',include('auction.urls')),
 ]
+handler404='cricket_stats.views.custom_404'

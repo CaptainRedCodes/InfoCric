@@ -28,10 +28,10 @@ SECRET_KEY = 'django-insecure-2ro(yh)e-%1ks*q3irbic9ajs4up%o=@ht-$9awd6!@mmxt49w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home:home'
+LOGOUT_REDIRECT_URL = 'home:home'
 LOGIN_URL='login'
 
 
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'matchlist',
     'serieslist',
     'home',
-    'auction',
     'userlogin',
     'social_django',
     'filterstats',
@@ -164,3 +163,4 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(os.getenv('GOOGLE_SECRET'))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+

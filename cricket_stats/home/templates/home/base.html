@@ -54,7 +54,6 @@
                 <a href="{% url 'filter_stats:filter_stats' %}" class="text-white hover:text-primary-200 transition duration-300">Stats</a>
                 <a href="{% url 'matchlist:matchlist' %}" class="text-white hover:text-primary-200 transition duration-300">Recent Matches</a>
                 <a href="{% url 'serieslist:serieslist' %}" class="text-white hover:text-primary-200 transition duration-300">Upcoming Series</a>
-                <a href="{% url 'auction:coming_soon' %}" class="text-white hover:text-primary-200 transition duration-300">AUCTION!</a>
                 
                 {% if user.is_authenticated %}
                     <form method="post" action="{% url 'userlogin:logout' %}" style="display:inline;">  <!-- Inline form -->
