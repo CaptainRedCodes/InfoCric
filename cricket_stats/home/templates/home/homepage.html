@@ -56,7 +56,9 @@
             
             <!-- Live Scores Section -->
             <div class="bg-white rounded-xl shadow-lg p-6 fade-in stagger-delay-2">
-                <h2 class="text-2xl font-semibold text-primary-700 mb-4">Live Scores</h2>
+                <h2 class="text-2xl font-semibold text-primary-700 flex items-center">
+                <span class="inline-block w-3 h-3 bg-red-500 rounded-full animate-pulse mr-2"></span>Live Scores</h2>
+                <br>
                 <div class="space-y-4">
                     {% if scores %}
                         {% for match in scores %}
@@ -81,7 +83,8 @@
                         <div class="bg-white rounded-lg shadow-md p-4">
                             <h3 class="font-semibold text-xl mb-2 ">{{ article.title }}</h3>
                             <p  class="text-gray-600">{{article.description}}</p>
-                            <a href="{{ article.link }}" class="text-green-500 hover:underline">Read more</a>
+                            <a href="{% url 'home:news_page' article.news_id article.headline %}" class="text-green-500 hover:underline">Read more</a>
+
                         </div>
                     {% endfor %}
                 {% else %}
