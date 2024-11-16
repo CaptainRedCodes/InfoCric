@@ -1,6 +1,9 @@
 {% extends 'home/base.html' %}
 
-    {% block title %}InfoCric - Search Cricketer{% endblock %}
+{% block title %}InfoCric - Search Cricketer{% endblock %}
+
+{% block content %}
+<head>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -38,7 +41,6 @@
         }
     </style>
 </head>
-{% block content %}
 <body class="bg-gradient-to-br from-primary-50 to-primary-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8 font-sans">
     <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12 fade-in">
@@ -76,25 +78,29 @@
         </div>
 
         {% if stats and player_details %}
+        {% load static %}
         <div class="bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl fade-in">
             <div class="p-8">
                 <h2 class="text-2xl font-semibold text-primary-700 mb-6">Cricketer Information</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- Player Image and Name Section -->
+                     
                     <div class="lg:col-span-1">
-                        <img
-                            src="https://i.cricketcb.com/stats/img/faceImages/{{ stats.faceImageId }}.jpg"
-                            alt="{{ stats.name }}"
-                            class="w-full rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
-                        >
+                        {% if player_details.url %}
+                        <img src="{{ player_details.image_url }}" 
+                        alt="{{ player_details.name }}"
+                        class="w-full rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
+                        />
                         <h3 class="text-2xl font-bold text-primary-800 mt-4 mb-2">{{ stats.name }}</h3>
-                        <div class="flex space-x-4 mb-6">
-                            <button onclick="openTab(event, 'info')" class="tab-button bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300">Info</button>
-                            <button onclick="openTab(event, 'career')" class="tab-button bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300">Career</button>
-                        </div>
+                        {% endif %}
                     </div>
+
+                    <!-- Player Info Section -->
                     <div class="lg:col-span-3">
-                        <div id="info" class="tab-content">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <!-- Basic Information -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-primary-600 mb-4">Basic Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <p class="text-sm text-primary-500 font-medium">Batting Style</p>
                                     <p class="text-lg">{{ player_details.bat|default:"N/A" }}</p>
@@ -112,7 +118,7 @@
                                     <p class="text-lg">{{ player_details.nickName|default:"N/A" }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-primary-500 font-m   edium">Birth Place</p>
+                                    <p class="text-sm text-primary-500 font-medium">Birth Place</p>
                                     <p class="text-lg">{{ player_details.birthPlace|default:"N/A" }}</p>
                                 </div>
                                 <div>
@@ -127,139 +133,132 @@
                                     <p class="text-sm text-primary-500 font-medium">Teams</p>
                                     <p class="text-lg">{{ player_details.teams|default:"N/A" }}</p>
                                 </div>
-                                <div>
-                                    <p class="text-sm text-primary-500 font-medium">Best Rankings(Batting)</p>
-                                    <p class="text-lg"><b>Test Rank: </b>{{ player_details.rankings.bat.testBestRank|yesno:"N/A,Rank" }}</p>
-                                    <p class="text-lg"><b>Odi Rank: </b>{{ player_details.rankings.bat.odiBestRank|yesno:"N/A,Rank" }}</p>
-                                    <p class="text-lg"><b>T20 Rank: </b>{{ player_details.rankings.bat.t20BestRank|yesno:"N/A,Rank" }}</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-primary-500 font-medium">Best Rankings(Bowling)</p>
-                                    <p class="text-lg"><b>Test Rank: </b>{{ player_details.rankings.bowl.testBestRank|yesno:"N/A,Rank" }}</p>
-                                    <p class="text-lg"><b>Odi Rank: </b>{{ player_details.rankings.bowl.odiBestRank|yesno:"N/A,Rank" }}</p>
-                                    <p class="text-lg"><b>T20 Rank: </b>{{ player_details.rankings.bowl.t20BestRank|yesno:"N/A,Rank" }}</p>
-                                </div>
-                            </div>
-                            <div class="mb-8">
-                                <h3 class="text-xl font-semibold text-primary-600 mb-4">Batting Stats</h3>
-                                {% if player_stats.batting_stats %}
-                                    <div class="overflow-x-auto">
-                                        <table class="min-w-full text-left text-sm">
-                                            <thead class="bg-primary-100">
-                                                <tr>
-                                                    <th class="px-6 py-3">Stat</th>
-                                                    <th class="px-6 py-3">Test</th>
-                                                    <th class="px-6 py-3">ODI</th>
-                                                    <th class="px-6 py-3">T20</th>
-                                                    <th class="px-6 py-3">IPL</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                {% for stats in player_stats.batting_stats %}
-                                                <tr>
-                                                    <td class="px-6 py-4">{{ stats.name }}</td>
-                                                    <td class="px-6 py-4">{{ stats.Test }}</td>
-                                                    <td class="px-6 py-4">{{ stats.ODI }}</td>
-                                                    <td class="px-6 py-4">{{ stats.T20 }}</td>
-                                                    <td class="px-6 py-4">{{ stats.IPL }}</td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                {% else %}
-                                    <p>No batting stats available.</p>
-                                {% endif %}
-                            </div>
-                            
-                            <div>
-                                <h3 class="text-xl font-semibold text-primary-600 mb-4">Bowling Stats</h3>
-                                {% if player_stats.bowling_stats %}
-                                    <div class="overflow-x-auto">
-                                        <table class="min-w-full text-left text-sm">
-                                            <thead class="bg-primary-100">
-                                                <tr>
-                                                    <th class="px-6 py-3">Stat</th>
-                                                    <th class="px-6 py-3">Test</th>
-                                                    <th class="px-6 py-3">ODI</th>
-                                                    <th class="px-6 py-3">T20</th>
-                                                    <th class="px-6 py-3">IPL</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                {% for stats in player_stats.bowling_stats %}
-                                                <tr>
-                                                    <td class="px-6 py-4">{{ stats.name }}</td>
-                                                    <td class="px-6 py-4">{{ stats.Test }}</td>
-                                                    <td class="px-6 py-4">{{ stats.ODI }}</td>
-                                                    <td class="px-6 py-4">{{ stats.T20 }}</td>
-                                                    <td class="px-6 py-4">{{ stats.IPL }}</td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                {% else %}
-                                    <p>No bowling stats available.</p>
-                                {% endif %}
-                            </div>
-                            
-                            
-                            {% if messages %}
-                            <div class="mt-4">
-                                <ul class="messages">
-                                    {% for message in messages %}
-                                    <li class="{% if message.tags %}{{ message.tags }}{% endif %} p-2 mb-2 rounded">{{ message }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            {% endif %}
                             </div>
                         </div>
-                        <div id="career" class="tab-content hidden">
+
+                        <!-- Career Information -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-primary-600 mb-4">Career Information</h3>
                             {% if player_career %}
-                                <div class="space-y-4">
-                                    <h3 class="text-xl font-bold text-primary-800">Formats</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     {% for format in player_career.formats %}
-                                        <div class="border-b border-primary-200 py-4">
-                                            <h4 class="text-lg font-semibold text-primary-700">{{ format.name|upper }}</h4>
-                                            <p><strong>Debut:</strong> {{ format.debut|default:"N/A" }}</p>
-                                            <p><strong>Last Played:</strong> {{ format.lastPlayed|default:"N/A" }}</p>
+                                        <div class="bg-primary-50 p-4 rounded-lg">
+                                            <h4 class="text-lg font-semibold text-primary-700 mb-2">{{ format.name|upper }}</h4>
+                                            <p class="text-sm mb-1"><span class="font-medium">Debut:</span> {{ format.debut|default:"N/A" }}</p>
+                                            <p class="text-sm"><span class="font-medium">Last Played:</span> {{ format.lastPlayed|default:"N/A" }}</p>
                                         </div>
                                     {% endfor %}
-                                </div>
-                                <div class="mt-6">
-                                    <a href="{{ player_career.webURL }}" target="_blank" class="text-primary-600 underline">View full profile on Cricbuzz</a>
                                 </div>
                             {% else %}
                                 <p>No career information available.</p>
                             {% endif %}
                         </div>
+
+                        <!-- Rankings Information -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-primary-600 mb-4">Rankings</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-primary-50 p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-primary-700 mb-2">Batting Rankings</h4>
+                                    <p class="mb-1"><span class="font-medium">Test:</span> {{ player_details.rankings.bat.testBestRank|default:"N/A" }}</p>
+                                    <p class="mb-1"><span class="font-medium">ODI:</span> {{ player_details.rankings.bat.odiBestRank|default:"N/A" }}</p>
+                                    <p><span class="font-medium">T20:</span> {{ player_details.rankings.bat.t20BestRank|default:"N/A" }}</p>
+                                </div>
+                                <div class="bg-primary-50 p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-primary-700 mb-2">Bowling Rankings</h4>
+                                    <p class="mb-1"><span class="font-medium">Test:</span> {{ player_details.rankings.bowl.testBestRank|default:"N/A" }}</p>
+                                    <p class="mb-1"><span class="font-medium">ODI:</span> {{ player_details.rankings.bowl.odiBestRank|default:"N/A" }}</p>
+                                    <p><span class="font-medium">T20:</span> {{ player_details.rankings.bowl.t20BestRank|default:"N/A" }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Batting Stats -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-primary-600 mb-4">Batting Stats</h3>
+                            {% if player_stats.batting_stats %}
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full text-left text-sm">
+                                        <thead class="bg-primary-100">
+                                            <tr>
+                                                <th class="px-6 py-3">Stat</th>
+                                                <th class="px-6 py-3">Test</th>
+                                                <th class="px-6 py-3">ODI</th>
+                                                <th class="px-6 py-3">T20</th>
+                                                <th class="px-6 py-3">IPL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            {% for stats in player_stats.batting_stats %}
+                                            <tr>
+                                                <td class="px-6 py-4">{{ stats.name }}</td>
+                                                <td class="px-6 py-4">{{ stats.Test }}</td>
+                                                <td class="px-6 py-4">{{ stats.ODI }}</td>
+                                                <td class="px-6 py-4">{{ stats.T20 }}</td>
+                                                <td class="px-6 py-4">{{ stats.IPL }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p>No batting stats available.</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Bowling Stats -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-semibold text-primary-600 mb-4">Bowling Stats</h3>
+                            {% if player_stats.bowling_stats %}
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full text-left text-sm">
+                                        <thead class="bg-primary-100">
+                                            <tr>
+                                                <th class="px-6 py-3">Stat</th>
+                                                <th class="px-6 py-3">Test</th>
+                                                <th class="px-6 py-3">ODI</th>
+                                                <th class="px-6 py-3">T20</th>
+                                                <th class="px-6 py-3">IPL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            {% for stats in player_stats.bowling_stats %}
+                                            <tr>
+                                                <td class="px-6 py-4">{{ stats.name }}</td>
+                                                <td class="px-6 py-4">{{ stats.Test }}</td>
+                                                <td class="px-6 py-4">{{ stats.ODI }}</td>
+                                                <td class="px-6 py-4">{{ stats.T20 }}</td>
+                                                <td class="px-6 py-4">{{ stats.IPL }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p>No bowling stats available.</p>
+                            {% endif %}
+                        </div>
+
+                        {% if player_career %}
+                            <div class="text-center mt-6">
+                                <a href="{{ player_career.webURL }}" target="_blank" class="text-primary-600 hover:text-primary-700 underline">View full profile on Cricbuzz</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
         {% endif %}
+
+        {% if messages %}
+        <div class="mt-4">
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="{% if message.tags %}{{ message.tags }}{% endif %} p-2 mb-2 rounded">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </div>
-    {% endblock %}
-    <script>
-
-        function openTab(evt, tabName) {
-            var i, tabContent, tabButtons;
-            tabContent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
-            }
-            tabButtons = document.getElementsByClassName("tab-button");
-            for (i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].className = tabButtons[i].className.replace(" bg-primary-600", " bg-primary-500");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className = evt.currentTarget.className.replace(" bg-primary-500", " bg-primary-600");
-        }
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.querySelector('.tab-button').click();
-        });
-
-    </script>
+</body>
+{% endblock %}
