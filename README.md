@@ -9,8 +9,13 @@ The Cricket Stats Dashboard is a web application built using Django that allows 
 
 - **Player Search**: Users can search for cricketers by name.
 - **Player Stats**: Displays detailed statistics, including batting and bowling averages, matches played, runs scored, and more.
+- **Latest News**: Get hot topics of cricketing world!
+- **Live Score**: Catch up the Live action.
+- **Cricket Stats**: Get stats based on your filters for all types of players and teams.
+- **Match and Series Schedule**: See when your team plays against whom
 - **Responsive Design**: The UI is designed to be user-friendly and responsive on different devices.
 - **Error Handling**: Graceful handling of API errors and no-data scenarios.
+
 
 ## Technologies Used
 
@@ -83,10 +88,10 @@ The Cricket Stats Dashboard is a web application built using Django that allows 
 
 - **Team Information**: Extend the application to provide details about cricket teams, including player rosters and team history.
 - **Stadium Information**: Include information about various cricket stadiums, such as location, capacity, and historical significance.
-- **Images**: Add player images and stadium pictures for a more visually appealing interface.
 - **Caching**: Implement chaching and storing stats to save API calls.
 - **Statistics Comparison**: Enable users to compare statistics between multiple players.
-- **IPL Auction**: Enable Users to play auction with friends.
+
+**NOTE**:If i find data, i will surely try this!
 
 ## Contributing
 
