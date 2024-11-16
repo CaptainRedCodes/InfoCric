@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class CricketAPIConfig:
     API_KEY: str = API_KEY  # Replace with your actual API key
-    API_HOST: str = "cricbuzz-cricket.p.rapidapi.com"
+    API_HOST: str = API_HOST
     BASE_URL: str = "https://cricbuzz-cricket.p.rapidapi.com/stats/v1"
     CACHE_TIMEOUT: int = 3600  # 1 hour cache
 
@@ -29,9 +29,6 @@ class PlayerImageHandler:
         os.makedirs(self.image_dir, exist_ok=True)
 
     def get_player_image(self, face_id: str) -> str:
-        """
-        Fetch and save player image, return the image URL
-        """
         if not face_id:
             return self.get_default_image_url()
 
@@ -43,8 +40,9 @@ class PlayerImageHandler:
             return f'{settings.MEDIA_URL}player_images/{image_filename}'
 
         try:
-            url = f"{self.base_url}/i1/{face_id}/i.jpg"
-            response = requests.get(url, headers=self.headers)
+            url = f"{self.base_url}/i1/c{face_id}/i.jpg"
+            querystring={"d":"high"}
+            response = requests.get(url, headers=self.headers,params=querystring)
             response.raise_for_status()
 
             # Verify it's an image response

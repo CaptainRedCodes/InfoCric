@@ -86,13 +86,11 @@
                     <!-- Player Image and Name Section -->
                      
                     <div class="lg:col-span-1">
-                        {% if player_details.url %}
-                        <img src="{{ player_details.image_url }}" 
+                        <img src="{{ player_img }}" 
                         alt="{{ player_details.name }}"
                         class="w-full rounded-lg shadow-md transition-all duration-300 hover:shadow-lg"
                         />
                         <h3 class="text-2xl font-bold text-primary-800 mt-4 mb-2">{{ stats.name }}</h3>
-                        {% endif %}
                     </div>
 
                     <!-- Player Info Section -->

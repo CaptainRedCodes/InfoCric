@@ -2,11 +2,12 @@ from venv import logger
 from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
-from .services import CricketAPIService
+from .services import CricketAPIService,PlayerImageHandler
 
 class PlayerSearchView(View):
     template_name = 'stats/search.html'
     cricket_service = CricketAPIService()
+    image_handler=PlayerImageHandler()
 
     def get(self, request):
         return render(request, self.template_name)
@@ -24,11 +25,13 @@ class PlayerSearchView(View):
 
             # Get all player information
             player_id = player_info['id']
+            face_id=player_info['faceImageId']
             context.update({
                 'stats': player_info,
                 'player_details': self.cricket_service.get_player_details(player_id),
                 'player_career': self.cricket_service.get_player_career(player_id),
-                'player_stats': self.cricket_service.get_player_stats(player_id)
+                'player_stats': self.cricket_service.get_player_stats(player_id),
+                'player_img':self.image_handler.get_player_image(face_id),
             })
 
         except:
