@@ -93,11 +93,11 @@ The Cricket Stats Dashboard is a web application built using Django that allows 
 
 **NOTE**:If i find data, i will surely try this!
 
-![Uploading Screenshot 2024-12-16 221734.png…]()
+![Screenshot 2024-12-16 221734](https://github.com/user-attachments/assets/fbd183b7-c884-451f-8037-63b2fab716f0)
 
 ![Screenshot 2024-12-16 221831](https://github.com/user-attachments/assets/5ff004a2-5b82-41f7-9d4c-523b1c5ecae3)
 
-![Uploading Screenshot 2024-12-16 221845.png…]()
+
 
 
 
