@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'userlogin',
     'social_django',
     'filterstats',
+    'ipl_analysis',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'cricket_stats.urls'
@@ -93,10 +97,14 @@ WSGI_APPLICATION = 'cricket_stats.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'infocric',
+        'USER': 'root',
+        'PASSWORD': 'Kayambody@15',
+        'PORT': '3306',
+        'HOST': 'localhost',
+ }
+   }
 
 
 # Password validation

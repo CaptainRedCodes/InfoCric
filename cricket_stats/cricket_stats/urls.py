@@ -27,7 +27,8 @@ urlpatterns = [
     path('',include('home.urls')),
     path('accounts/',include('userlogin.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
-    path('filter/',include('filterstats.urls'))
+    path('filter/',include('filterstats.urls')),
+    path('ipl/v1/',include('ipl_analysis.urls')),
 
     #path('auction/',include('auction.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
